@@ -1,9 +1,9 @@
-import LinkedList_Bags_Queues_Stacks.LinkedBag as LB
+from LinkedList_Bags_Queues_Stacks import LinkedBag as LB
 import sys
 import math
 
 def testmain():
-    numbers = LB()
+    numbers = LB.LinkedBag()
 
     data = sys.stdin.readlines()
     for value in data:
