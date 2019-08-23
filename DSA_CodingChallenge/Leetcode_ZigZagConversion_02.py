@@ -26,36 +26,32 @@ P     I
 """
 
 class Solution:
-    def __convertutil(self, stringlist, numRows):
-        result = []
-        for i in range(numRows):
-            flagUp = 1
-            flagDown = 0
-            skipnum = i
-            result.append(stringlist[skipnum])
-            while skipnum < len(stringlist):
-                # print('flagDown:{} flagUp:{} char:{}'.format(flagDown, flagUp, stringlist[skipnum]))
-                val = (flagUp * 2 * (numRows - i - 1)) + (flagDown * 2 * i)
-                if val != 0:
-                    skipnum += val
-                    if skipnum >= len(stringlist):
-                        break
-                    result.append(stringlist[skipnum])
-                temp = flagUp
-                flagUp = flagDown
-                flagDown = temp
-        return result
-
-    def convert(self, s: str, numRows: int) -> str:
-        stringlist=list(s)
-        if stringlist is None:
-            return ""
+    def convert(self, s, numRows):
+        if s == "":
+            return s
         if numRows == 1:
             return s
-        if numRows >= len(stringlist):
+        if numRows >= len(s):
             return s
-        result = self.__convertutil(stringlist, numRows)
-        return "".join(result)
+        step = 1
+        pos = 1
+        lines = {}
+        for c in s:
+            if pos not in lines:
+                lines[pos] = c
+            else:
+                lines[pos] += c
+            pos += step
+            if pos == 1 or pos == numRows:
+                step *= -1
+
+        result = ""
+        for i in range(1, numRows + 1):
+            try:
+                result += lines[i]
+            except:
+                return result
+        return result
 
 def main():
     testcases=[]

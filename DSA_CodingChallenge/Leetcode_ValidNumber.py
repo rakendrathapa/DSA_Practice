@@ -28,8 +28,8 @@ Of course, the context of these characters also matters in the input.
 from enum import Enum
 class Solution:
     def isNumber(self, s):
-        teststring=list(s)        
-        checkcase = {'checkwhitespace':0, 
+        teststring=list(s)
+        checkcase = {'checkwhitespace':0,
         'checkExponent': 1,
         'checkSign':2,
         'checkDecimal':3,
@@ -45,7 +45,7 @@ class Solution:
         for char in teststring:
             val = ord(char) - ord('0')
             # print('char:{} ord(char):{}'.format(char, ord(char)))
-            
+
             if ord(char) == 32 or ord(char)==160:
                 # print('val:{}'.format(val))
                 case = 'checkwhitespace'
@@ -66,11 +66,11 @@ class Solution:
                     return False
                 setExponent = True
                 setLastChar = True
-                
+
             elif char == '+' or char == '-':
                 # can only be before the the integer and no twice
                 case = 'checkSign'
-                # print('case:{}'.format(case))                
+                # print('case:{}'.format(case))
                 if setlastwhitespace is True:
                     return False
                 if setSign is True:
@@ -126,7 +126,7 @@ def main():
     testcases.append(" --6 ")
     testcases.append("-+3")
     testcases.append("95a54e53")
-    
+
     sol = Solution()
     for teststring in testcases:
         ans = sol.isNumber(teststring)
