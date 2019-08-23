@@ -1,4 +1,4 @@
-'''
+"""
 Given n points on a 2D plane, find the maximum number of points that lie on the same straight line.
 Example 1:
 Input: [[1,1],[2,2],[3,3]]
@@ -8,7 +8,7 @@ Explanation:
 |
 |        o
 |     o
-|  o �
+|  o �
 +------------->
 0  1  2  3  4
 
@@ -24,8 +24,8 @@ Explanation:
 |  o        o
 +------------------->
 0  1  2  3  4  5  6
+"""
 
-'''
 from collections import defaultdict
 
 class Solution:

@@ -16,14 +16,14 @@ def testfunction(cardstr):
         print("LOSE")
 
 def main():
-    testcases = int(input())
-    # testcases = 1
+    # testcases = int(input())
+    testcases = 1
     if testcases < 1 or testcases > 10 ** 2:
         raise ValueError('Invalid testcases')
 
     for i in range(testcases):
-        cardstr = input()
-        # cardstr = '00110000'
+        # cardstr = input()
+        cardstr = '00110000'
         testfunction(cardstr)
 
 if __name__ == "__main__":
