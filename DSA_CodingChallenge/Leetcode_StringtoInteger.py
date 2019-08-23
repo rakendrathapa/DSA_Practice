@@ -22,7 +22,7 @@ Explanation: Conversion stops at digit '3' as the next character is not a numeri
 Example 4:
 Input: "words and 987"
 Output: 0
-Explanation: The first non-whitespace character is 'w', which is not a numerical 
+Explanation: The first non-whitespace character is 'w', which is not a numerical
              digit or a +/- sign. Therefore no valid conversion could be performed.
 Example 5:
 Input: "-91283472332"
@@ -37,37 +37,37 @@ class Solution:
         sign = False
         signset = False
         intmax = 2**31
-        
+
         for char in intlst:
             if char == ' ': # whitespace
                 if signset is True:
                     break
                 continue
-                
+
             if char == '-' or char == '+':
                 if signset is True: # sign
                     break
-                else:   
+                else:
                     sign = True if char == '-' else False
                     signset = True
                     continue
-            
+
             charintval = ord(char) - ord('0')
             if charintval < 0 or charintval > 9:
                 break
             if intmax < (val * 10 + charintval):
-                val = intmax                
+                val = intmax
                 break
             val = val * 10 + charintval
             signset = True
-        
+
         if sign is True:
             val = -val
         else:
             if val == intmax:
                 val = val - 1
 
-        return val    
+        return val
 
 def main ():
     testvalues = []
@@ -85,14 +85,14 @@ def main ():
     testvalues.append('-9223372036854775810')
     testvalues.append('9223372036854775810')
     testvalues.append('-5-')
-        
+
     sol = Solution()
     for vals in testvalues:
         print(sol.myAtoi(vals))
-    
+
 if __name__ == '__main__':
     main()
-    
 
 
-            
+
+

@@ -6,15 +6,15 @@ def testfunction(cardstr):
     cards = list(cardstr)
     # print(cards)
     count = 0
-    for i in cards: 
-        if int(i)==1: 
+    for i in cards:
+        if int(i)==1:
             count += 1
-    
+
     if (count%2 != 0):
         print("WIN")
     else:
         print("LOSE")
-    
+
 def main():
     testcases = int(input())
     # testcases = 1

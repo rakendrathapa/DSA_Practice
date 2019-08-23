@@ -33,8 +33,8 @@ class Solution:
                 if nums[front] == i_candidate and nums[back] == j_candidate:
                     front += 1
                     back -= 1
-                    continue                
-                
+                    continue
+
                 if nums[front] + nums[back] > sum:
                     back -= 1
                 elif nums[front] + nums[back] < sum:
@@ -46,8 +46,8 @@ class Solution:
                     j_candidate = nums[back]
                     front += 1
                     back -= 1
-                    
-        
+
+
         print(threeSumslist)
 
 def main():

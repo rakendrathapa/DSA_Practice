@@ -1,24 +1,24 @@
 # LongestPalindromeSubstring
 class Solution:
     def longestPalindrome(self, s):
-        # A O(n^2) time and O(1) space program to find the  
+        # A O(n^2) time and O(1) space program to find the
         #longest palindromic substring
-        
-        # This function prints the longest palindrome substring (LPS) 
+
+        # This function prints the longest palindrome substring (LPS)
         # of str[].
         # print(len(s))
         maxLength = 1
         length = len(s)
         low = 0
         high = 0
-        table = [[0 for x in range(length)] for x in range(length)] 
+        table = [[0 for x in range(length)] for x in range(length)]
         print("Init table: {}".format(table))
 
-        # One by one consider every character as center point of  
+        # One by one consider every character as center point of
         # even and length palindromes
         for i in range(length):
             table[i][i] = 1
-        
+
         print("table 1: {}".format(table))
 
         # Palindromes of length 2

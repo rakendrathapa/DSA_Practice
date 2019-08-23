@@ -13,7 +13,7 @@ class Solution:
         if node.val < leftmin or node.val > rightmax:
             return False
         return self.isValidBSTUtil(node.left, leftmin, node.val - 1) and self.isValidBSTUtil(node.right, node.val + 1, rightmax)
-    
+
     def isValidBST(self, root):
         leftmin = -sys.maxsize - 1
         rightmax = sys.maxsize

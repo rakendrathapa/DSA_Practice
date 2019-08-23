@@ -14,7 +14,7 @@ def main():
     testcases=int(input())
     if testcases<1 or testcases>100: return 0
 #        raise ValueError("Invalid value of testcases")
-  
+
     for i in range(testcases):
         N = int(input())
         if N<1 or N>150: return 0
@@ -27,7 +27,7 @@ def main():
         if N != len(As) and N != len(Bs): return 0
         maxVal=testfunction(As, Bs)
         print(maxVal)
-  
+
 
 if __name__ == "__main__":
     main()

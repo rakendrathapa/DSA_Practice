@@ -8,7 +8,7 @@ Explanation:
 |
 |        o
 |     o
-|  o  
+|  o �
 +------------->
 0  1  2  3  4
 
@@ -31,33 +31,33 @@ from collections import defaultdict
 class Solution:
     def __maxval(self, val1, val2):
         return val1 if val1 > val2 else val2
-        
+
     def __gcd(self, x,y):
         while(y):
             x, y = y, x % y
         return x
 
-    def maxPoints(self, points):        # points: List[List[int]]        
+    def maxPoints(self, points):        # points: List[List[int]]
         if len(points) <= 2:
             return len(points)
 
         maxPointsLength = 0
-        
+
         for i in range(len(points)):
-            currMax = overlapPoints = verticalPoints = 0            
+            currMax = overlapPoints = verticalPoints = 0
             slopes = defaultdict(int)
 
             for j in range(i+1, len(points)):
                 x1,y1 = points[i]
                 x2, y2 = points[j]
-                
+
                 # If both point equal
                 if points[j] == points[i]:
                     overlapPoints += 1
                 # If x co-ordinate is same, then Perpendicular slope
                 elif x1 == x2:
                     verticalPoints += 1
-                
+
                 else:
                     yDif = y2 - y1
                     xDif = x2 - x1
@@ -70,9 +70,9 @@ class Solution:
                     # print('x1:{} y1:{} x2:{} y2:{} slope:{}'.format(x1, y1, x2, y2, slope))
 
                     slopes[slope] += 1
-                    currMax = self.__maxval(currMax, slopes[slope])                
+                    currMax = self.__maxval(currMax, slopes[slope])
                 currMax = self.__maxval(currMax, verticalPoints)
-            
+
             # updating global maximum
             maxPointsLength = self.__maxval(maxPointsLength, currMax + overlapPoints + 1)
 
