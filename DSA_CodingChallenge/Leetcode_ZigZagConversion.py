@@ -27,21 +27,41 @@ P     I
 
 class Solution:
     def __convertutil(self, stringlist, numRows):
-        skipnum = 2 * (numRows - 1)
-        result = stringlist[0::skipnum]
+        result = []
+        for i in range(numRows):
+            flagUp = 1
+            flagDown = 0
+            skipnum = i
+            result.append(stringlist[skipnum])
+            while skipnum < len(stringlist):
+                # print('flagDown:{} flagUp:{} char:{}'.format(flagDown, flagUp, stringlist[skipnum]))
+                val = (flagUp * 2 * (numRows - i - 1)) + (flagDown * 2 * i)
+                if val != 0:
+                    skipnum += val
+                    if skipnum >= len(stringlist):
+                        break
+                    result.append(stringlist[skipnum])
+                temp = flagUp
+                flagUp = flagDown
+                flagDown = temp
         return result
 
     def convert(self, s: str, numRows: int) -> str:
         stringlist=list(s)
+        if stringlist is None:
+            return ""
+        if numRows == 1:
+            return s
+        if numRows >= len(stringlist):
+            return s
         result = self.__convertutil(stringlist, numRows)
-        print(result)
-        # result += stringlist[1::skipnum]
-        # for i in range(numRows):
-        #    result += s[i:, numRows]
-        return result
+        return "".join(result)
 
 def main():
     testcases=[]
+    testcases.append(("", 1))
+    testcases.append(("A", 3))
+    testcases.append(("AB", 1))
     testcases.append(("PAYPALISHIRING", 3))
     testcases.append(("PAYPALISHIRING", 4))
     sol = Solution()
@@ -49,7 +69,8 @@ def main():
         s, numRows = case
         print("s:{} numRows:{}".format(s, numRows))
         ans = sol.convert(s, numRows)
-        print('s:{} result:{}'.format(s, ans)) 
+        print('s:{} result:{}'.format(s, ans))
+
 
 if __name__ == '__main__':
     main()
