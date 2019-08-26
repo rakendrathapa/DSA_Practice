@@ -16,49 +16,42 @@ class Solution:
     def __maxcount(self, leftval, rightval):
         return leftval if leftval > rightval else rightval
 
+
     def longestValidParentheses(self, s):
         if len(s) < 2:
             return 0
-                
+
         if len(s) == 2:
             return 2 if s=='()' else 0
-        
-        stack = list()
-        maxcount = count = nextcount = 0
+
+        maxcount = left = right = 0
         for i in range(len(s)):
             if s[i] == '(':
-                stack.append(s[i])
+                left += 1
+
             elif s[i] == ')':
-                if len(stack):
-                    stack.pop()
-                    count += 2
-                else:
-                    
-            else:
-                break
-        
-        maxcount = self.__maxcount(count, )
+                right += 1
 
-    def longestValidParentheses(self, s):
-        if len(s) < 2:
-            return 0
-                
-        if len(s) == 2:
-            return 2 if s=='()' else 0
-                
-        maxcount = count = nextindex = 0
-        for i in range(0, len(s), 2):
-            nextindex = i
-            if s[i:i+2] == '()':
-                count += 2
-            else:
-                break
+            if left == right:
+                maxcount = self.__maxcount(maxcount, 2*right)
 
-        print('nextindex:{} count:{}'.format(i, count))
-        if nextindex+1 >= len(s):
-            return count
-        else: 
-            maxcount = self.__maxcount(count, self.longestValidParentheses(s[nextindex+1:]))
+            if right > left:
+                left = right = 0
+
+        left = right = 0
+        for i in range(len(s) - 1, -1, -1):
+            if s[i] == '(':
+                left += 1
+
+            elif s[i] == ')':
+                right += 1
+
+            if left == right:
+                maxcount = self.__maxcount(maxcount, 2 * right)
+
+            if left > right:
+                left = right = 0
+
         return maxcount
 
 
@@ -69,7 +62,8 @@ def main():
     testcases.append("()()")
     testcases.append("()(())")
     testcases.append("()(())(()")
-    testcases.append("()(())(()((((()()")
+    testcases.append(")()())()()(")
+    testcases.append("")
 
     sol = Solution()
     for case in testcases:
