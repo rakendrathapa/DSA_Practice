@@ -10,17 +10,14 @@ Note: you can assume that no duplicate edges will appear in edges. Since all edg
 """
 from collections import defaultdict
 
-
 class Graph:
-
     def __init__(self, num_of_v):
         self.n_vertices = num_of_v
         self.edges = defaultdict(list)
 
     # Graph is array of edges
     def add_edge(self, edge):
-        u = edge[0]
-        v = edge[1]
+        u, v = edge
         self.edges[u].append(v)
 
 
@@ -31,47 +28,42 @@ class Subset:
 
 
 def find(subsets, node):
-    while subsets[node].parent != node:
-        node = subsets[node].parent
-
+    if subsets[node].parent != node:
+        subsets[node].parent = find(subsets, subsets[node].parent)
     return subsets[node].parent
 
 
 def union(subsets, u, v):
-    if subsets[u].rank > subsets[v].rank:
-        subsets[v].parent = u
-    elif subsets[v].rank > subsets[u].rank:
-        subsets[u].parent = v
-    else:
-        subsets[v].parent = u
-        subsets[u].rank += 1
+    parent_u, parent_v = find(subsets, u), find(subsets, v)
+    print('u:{} v:{} parent_u:{} parent_V:{}'.format(u, v, parent_u, parent_v))
+    if parent_u != parent_v:
+        if subsets[u].rank > subsets[v].rank:
+            subsets[v].parent = u
+        elif subsets[v].rank > subsets[u].rank:
+            subsets[u].parent = v
+        else:
+            subsets[v].parent = u
+            subsets[v].rank += 1
+        return True
+    return False
 
 
 def isNotCycle(graph):
     subsets = []
-    for u in range(graph.n_vertices):
+    count = graph.n_vertices
+    for u in range(count):
         subsets.append(Subset(u, 0))
 
     # Iterate through all edges of the graph
     # find sets of both vertices of every edge
     # if sets are same, then there is cycle in the graph
     for u in graph.edges:
-        u_rep = find(subsets, u)
         for v in graph.edges[u]:
-            v_rep = find(subsets, v)
-            if u_rep == v_rep:
+            if not union(subsets, u, v):
                 return False
-            else:
-                union(subsets, u_rep, v_rep)
-
-
-    prev = subsets[0]
-    for u in range(1, len(subsets)):
-        u_rep = subsets[u]
-        if prev != u_rep:
-            return False
-        prev = u_rep
-    return True
+            count -= 1
+    # print(count)
+    return count == 1
 
 
 class Solution:
@@ -117,6 +109,10 @@ def main():
     testcases.append(case)
     n = 4
     edges = [[0, 1], [2, 3]]
+    case = (n, edges)
+    testcases.append(case)
+    n = 5
+    edges = [[0, 1], [2, 1], [2, 0], [2, 4]]
     case = (n, edges)
     testcases.append(case)
 
