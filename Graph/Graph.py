@@ -1,4 +1,5 @@
 from collections import defaultdict, deque
+from .DisjointSets import DisjointSets
 
 class Graph:
     def __init__(self, num_vertices):
@@ -56,13 +57,13 @@ class WeightedUDGraph(UDGraph):
         self.weights.append((u, v, w))
 
     def KruskalMST(self):
-        result = []
-        i = 0   # for sorted edges
-        e = 0   # for result[]
-
-        print('Before:', self.weights)
-        self.weights.sort(key=lambda item: item[2])
-        print('After:', self.weights)
-        return result
+        result = list()
+        sorted_edges = sorted(self.weights, key=lambda item: item[2])
+        uf = DisjointSets(self.num_of_vertices)
+        for edge in sorted_edges:
+            u, v, w = edge
+            if uf.union(u, v):
+                result.append((u, v))
+        yield result
 
 

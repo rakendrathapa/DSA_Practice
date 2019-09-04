@@ -12,11 +12,13 @@ class DisjointSets:
     def union(self, u, v):
         parent_u, parent_v = self.__find(u), self.__find(v)
         if parent_u != parent_v:
-            if self.rank[u] > self.rank[v]:
-                self.parent[v] = u
-            elif self.rank[v] > self.rank[u]:
-                self.parent[u] = v
+            if self.rank[parent_u] > self.rank[parent_v]:
+                self.parent[parent_v] = parent_u
+            elif self.rank[parent_v] > self.rank[parent_u]:
+                self.parent[parent_u] = parent_v
             else:
-                self.parent[v] = u
-                self.rank[u] += 1
+                self.parent[v] = parent_u
+                self.rank[parent_v] += 1
             self.sets -= 1
+            return True
+        return False
