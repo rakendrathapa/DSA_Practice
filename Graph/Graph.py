@@ -1,6 +1,5 @@
 from collections import defaultdict, deque
 
-
 class Graph:
     def __init__(self, num_vertices):
         self.edges = defaultdict(list)
