@@ -3,7 +3,6 @@
 # undirected graph
 from collections import defaultdict
 
-
 # Graph representing class
 class Graph:
     class __Node:

@@ -8,7 +8,6 @@ class Graph:
     def addEdge(self, u, v):
         raise NotImplementedError('To be implemented in the subclass')
 
-
 class UDGraph(Graph):
     def __init__(self, n):
         super().__init__(n)
@@ -45,3 +44,25 @@ class UDGraph(Graph):
                     queue.appendleft(v)
                     visited[v] = True
             yield u
+
+
+class WeightedUDGraph(UDGraph):
+    def __init__(self, vertices):
+        super().__init__(vertices)
+        self.weights = list()
+
+    def add_weighted_edges(self, u, v, w):
+        self.addEdge(u, v)
+        self.weights.append((u, v, w))
+
+    def KruskalMST(self):
+        result = []
+        i = 0   # for sorted edges
+        e = 0   # for result[]
+
+        print('Before:', self.weights)
+        self.weights.sort(key=lambda item: item[2])
+        print('After:', self.weights)
+        return result
+
+
