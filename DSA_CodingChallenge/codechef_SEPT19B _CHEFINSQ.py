@@ -30,6 +30,14 @@ Example case 1: There are six subsequence with length 2: (1,2), (1,3), (1,4
 
 """
 import sys
+def testmain2():
+    t = 1
+    for case in range(t):
+        k = 2
+        a = [1, 2, 3, 4, 5]
+        weighted_a = [sum(a[i-k:i] for i in range(k, len(a))]
+
+
 def testmain():
     # t = int(input())
     t = 1
