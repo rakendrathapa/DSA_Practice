@@ -33,9 +33,21 @@ import sys
 def testmain2():
     t = 1
     for case in range(t):
-        k = 2
+        k = 3
         a = [1, 2, 3, 4, 5]
-        weighted_a = [sum(a[i-k:i] for i in range(k, len(a))]
+        if k == 0:
+            return 0
+        if len(a) <= k:
+            return 1
+
+        weighted_a = [sum(a[:i]) for i in range(len(a))]
+        print(weighted_a)
+
+
+        weighted_a = [a[i] for i in range(k-1)]
+        weighted_a.extend([sum(a[i-k+1:i]) for i in range(k, len(a))])
+        print(a)
+        print(weighted_a)
 
 
 def testmain():
@@ -65,6 +77,6 @@ def testmain():
 
 
 if __name__ == '__main__':
-    testmain()
+    testmain2()
 
 
