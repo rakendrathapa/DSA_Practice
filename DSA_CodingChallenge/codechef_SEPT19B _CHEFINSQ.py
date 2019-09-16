@@ -29,54 +29,30 @@ Explanation
 Example case 1: There are six subsequence with length 2: (1,2), (1,3), (1,4), (2,3), (2,4 and (3,4). The minimum sum is 3 and the only subsequence with this sum is (1,2).
 
 """
-import sys
-def testmain2():
-    t = 1
-    for case in range(t):
-        k = 3
-        a = [1, 2, 3, 4, 5]
-        if k == 0:
-            return 0
-        if len(a) <= k:
-            return 1
+from math import factorial as fact
+from collections import defaultdict
 
-        weighted_a = [sum(a[:i]) for i in range(len(a))]
-        print(weighted_a)
-
-
-        weighted_a = [a[i] for i in range(k-1)]
-        weighted_a.extend([sum(a[i-k+1:i]) for i in range(k, len(a))])
-        print(a)
-        print(weighted_a)
-
-
-def testmain():
-    # t = int(input())
-    t = 1
-    for case in range(t):
-        k = 2
-        a = [1, 2, 3, 4, 5]
-        a.sort()
-        minimum = sum(a[:k])
-        count = 1
-        for i in range(len(a) + 1 - k):
-            total = a[i]
-            length = 0
-            for j in range(i+1, range(len(a))):
-                total += a[j]
-                length += 1
-                if length+1 >= k-1:
-                    if minimum > total:
-                        minimum = total
-                        count = 1
-                    elif minimum == total:
-                        count += 1
-                    total -= a[j - k]
-                    length -= 1
-        return count
-
+def testmain(A, k):
+    # n, k = map(int, input().split())
+    # l = list(map(int, input().split()))
+    n = len(A)
+    hash_arr = defaultdict(int)
+    for i in A:
+        hash_arr[i]+=1
+    r = 1
+    for j in hash_arr:
+        if j<=k:
+            k-=j
+        else:
+            r*=fact(j)/(fact(k)*fact(j-k))
+            k-=j
+        if k<0:
+            break
+    print(int(r))
 
 if __name__ == '__main__':
-    testmain2()
+    k = 3
+    a = [1, 2, 3, 4, 5, 6, 7]
+    testmain(a, k)
 
 

@@ -3,3 +3,6 @@
 *.iml
 .vscode*/*
 */.vscode/*
+*.suo
+*.json
+*/.vs/*
