@@ -45,16 +45,10 @@ class Solution:
         if root is None or root.left is None:
             return root
 
-        parent = None
-        curr_node = root
-        new_node = None
-        last_right = None
+        new_node = self.upsideDownBinaryTree(root.left)
+        root.left.left = root.right
+        root.left.right = root
+        root.left = None
+        root.right = None
 
-        while curr_node is not None:
-            new_node = curr_node.left
-            curr_node.left = last_right
-            last_right = curr_node.right
-            curr_node.right = parent
-            parent = curr_node
-            curr_node = new_node
-        return parent
+        return new_node
