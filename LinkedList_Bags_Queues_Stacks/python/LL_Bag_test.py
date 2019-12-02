@@ -1,8 +1,8 @@
-from LinkedList_Bags_Queues_Stacks import LinkedBag as LB
+from .LinkedBag import LinkedBag
 import math
 
 def testmain():
-    numbers = LB.LinkedBag()
+    numbers = LinkedBag()
 
     data = "10, 5, 6, 7, 2, 6, 78, 92"
     data = data.split(',')

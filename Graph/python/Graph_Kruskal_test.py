@@ -1,4 +1,4 @@
-from Graph import Graph
+from .Graph import WeightedUDGraph
 
 # Driver code
 def testmain():
@@ -11,7 +11,7 @@ def testmain():
 
     for cases in testcases:
         n, edges = cases
-        g = Graph.WeightedUDGraph(n)
+        g = WeightedUDGraph(n)
         for edge in edges:
             u, v, w = edge
             g.add_weighted_edges(u, v, w)

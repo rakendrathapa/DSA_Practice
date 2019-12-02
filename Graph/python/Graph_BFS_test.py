@@ -1,4 +1,4 @@
-from Graph import Graph as grph
+from .Graph import UDGraph, WeightedUDGraph
 
 def testmain():
     testcases = []
@@ -46,7 +46,7 @@ def testmain():
     count = 1
     for cases in testcases:
         n, edges = cases
-        g = grph.UDGraph(n)
+        g = UDGraph(n)
         for edge in edges:
             u, v = edge
             g.addEdge(u, v)
