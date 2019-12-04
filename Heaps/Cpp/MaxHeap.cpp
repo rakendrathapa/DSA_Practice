@@ -23,7 +23,7 @@ private:
 	}
 
 	// Heapify Down Algorithm.
-	// The node at index i and its 2 children 
+	// The node at index i and its 2 children
 	// violates the heap property.
 	void __heapify_down(int i)
 	{
@@ -74,7 +74,7 @@ public:
 	{
 		return heap.size();
 	}
-	
+
 	// Check heap empty or not
 	bool empty()
 	{
@@ -89,7 +89,7 @@ public:
 			if (this->empty()){
 				throw out_of_range("Vector<X>::at() : "
 				"index is out of range(Heap underflow)");
-			}			
+			}
 		}
 		catch(const out_of_range& oor){
 			std::cout << "\n" << oor.what() << std::endl;
@@ -174,16 +174,16 @@ int main()
 	h->push(45);
 
 	std::cout << std::endl << "Size is " << h->size() << std::endl;
-	
+
 	std::cout << h->top() << " ";
 	h->pop();
 	std::cout << h->pop() << " ";
 	std::cout << h->pop() << " ";
 	std::cout << h->pop() << " ";
 	std::cout << h->pop() << " ";
-	
+
 	std::cout << std::endl << std::boolalpha << h->empty();
-	
+
 	h->top();	// top operation on an empty heap
 	h->pop();	// pop operation on an empty heap
 
