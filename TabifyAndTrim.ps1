@@ -17,5 +17,5 @@ function Expand-Tab {
   }
 }
 
-Get-ChildItem -Recurse *.py | ForEach-Object { (Get-Content $_ | Expand-Tab) | Set-Content $_ }
-Get-ChildItem -Recurse *.py | ForEach-Object { (Get-Content $_ | ForEach-Object { $_.TrimEnd() }) | Set-Content $_ }
+Get-ChildItem -Recurse *.py, *.h, *.cpp., *.c | ForEach-Object { (Get-Content $_ | Expand-Tab) | Set-Content $_ }
+Get-ChildItem -Recurse *.py, *.h, *.cpp, *.c | ForEach-Object { (Get-Content $_ | ForEach-Object { $_.TrimEnd() }) | Set-Content $_ }
