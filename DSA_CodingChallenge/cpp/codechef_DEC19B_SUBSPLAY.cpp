@@ -47,10 +47,11 @@ int main()
     for (int i=0; i<t; i++){
         cin >> l;
         cin >> input;
-        PrintSubStrings(input);
+        // PrintSubStrings(input);
         int n = GetMaxSubStringLen(input);
         cout << n << endl;
     }
+
     return 0;
 }
 
@@ -64,6 +65,7 @@ void PrintSubStrings(const string& input)
     }
 }
 
+/*
 int GetMaxSubStringLen(const string& input)
 {
     int maxVal=0;
@@ -82,4 +84,29 @@ int GetMaxSubStringLen(const string& input)
         }
     }
     return maxVal;
+}
+*/
+
+int GetMaxSubStringLen(const string& input)
+{
+    // object from the class stringstream
+    unsigned char arr[26]={0}, prev[26]={0};
+    int dist=0, min=9999999;
+    for (size_t count=0; count < input.size(); count++ ){
+        // arr[(int)input[count] - 'a'] = count;
+        arr[(int)input[count] - 'a']++;
+
+        if(arr[(int)input[count] - 'a'] > 1){
+            dist = count - prev[(int)input[count] - 'a'];
+            if(dist < min){
+                min = dist;
+            }
+            prev[(int)input[count] - 'a'] = count;
+        }
+    }
+    if (min != 9999999){
+        // cout << input.size() - min << endl;
+        return input.size() - min;
+    }
+    return 0;
 }
