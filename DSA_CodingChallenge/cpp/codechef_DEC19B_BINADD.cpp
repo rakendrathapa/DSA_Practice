@@ -73,3 +73,128 @@
  * to 38 and 0.
  * 
  **/
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+extern int GetNumberOfLoops(string A, string B);
+
+int main()
+{
+    int t=0;
+    string A, B;
+
+    cin >> t;
+    for (int i=0; i<t; i++){
+        cin >> A;
+        cin >> B;
+        int n = GetNumberOfLoops(A, B);
+        cout << n << endl;
+    }
+
+    return 0;
+}
+
+int GetNumberOfLoops(string A, string B, string C)
+{
+    int a = stoi(A, 0, 2), u = 0;
+    int b = stoi(B, 0, 2), v = 0;
+    int c = stoi(C, 0, 2);
+    int count = 0;
+    cout << "a=" << a << " b=" << b << endl;
+    while(b > 0){
+        u = a ^ b;
+        v = a & b;
+        a = u;
+        b = v * 2;
+        count++;
+    }
+    cout << "sum = " << a << endl;
+    return count;
+}
+
+int GetNumberOfLoops(string A, string B)
+{
+    int len_a = A.size();
+    int len_b = B.size();
+    int dist = 0;
+
+    if(len_a > len_b){
+        dist = len_a - len_b;
+        std::string zeros(dist, '0');
+        A = zeros + A;
+    }else{
+        dist = len_b - len_a;
+        std::string zeros(dist, '0');
+        B = zeros + B;
+    }
+    return 0;    
+}
+
+
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+   long int t;
+   cin>>t;
+   while(t--)
+   {
+       string a,b;
+       cin>>a;
+       cin>>b;
+       long int i,la,lb,co=0,maxi=0,t1=0,di;
+       la=a.size();
+        lb=b.size();
+         if(la>lb)
+        {
+            di=la-lb;
+            for(i=0;i<di;i++)
+            {
+                b='0'+b;
+            }
+        }
+        else
+        {
+            di=lb-la;
+            for(i=0;i<di;i++)
+            {
+                a='0'+a;
+            }
+        }
+        for(i=0;i<b.size();i++)
+        {
+             if(b[i]=='1')
+            {   t1=1;
+                break;
+            }
+        }
+        if(t1==0)
+            cout<<"0"<<endl;
+            
+        else
+        {
+           for(i=0;i<a.size();i++)
+           {
+               if(a[i]=='1'&&b[i]=='1')
+                {
+                    co++;
+                    if(maxi<(co+1))
+                    maxi=co+1;
+                    co=0;
+                }
+                else if(a[i]=='1' || b[i]=='1')
+                {
+                    co++;
+                }
+                else
+                co=0;
+           }
+           if(maxi==0)
+            maxi=1;
+            cout<<maxi<<endl;
+        }
+   }
+}
