@@ -7,3 +7,4 @@
 *.json
 */.vs/*
 *.exe
+/cpp_practice/*
