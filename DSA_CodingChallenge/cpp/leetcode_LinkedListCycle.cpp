@@ -31,6 +31,7 @@
 #include <vector>
 
 using namespace std;
+
 struct ListNode {
     int val;
     ListNode *next;
@@ -56,6 +57,39 @@ public:
         }
         return true;
     }
+    
+    ListNode *detectCycle(ListNode *head) {
+        if(head == nullptr){
+            return nullptr;
+        }
+        if(head->next == nullptr){
+            return nullptr;
+        }
+        if(head->next == head){
+            return head;
+        }
+
+        ListNode* slow = head;
+        ListNode* fast = head->next;
+        ListNode* cycleNode = nullptr;
+
+        while(true){
+
+            if((fast == nullptr) || (fast->next == nullptr)){
+                return nullptr;
+            }
+
+            if((fast->next == slow) || (fast->next->next == slow)){
+                cycleNode = slow;
+                break;
+            }
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+
+        return cycleNode;
+    }
+
     void PrintLinkedList(ListNode* &head)
     {
         ListNode* node = head;
@@ -81,7 +115,6 @@ public:
         vector<int>::const_iterator it = inputarr.begin();
         while(it != inputarr.end())
         {
-            cout << "count:" << count << endl;
             if(count == 0){
                 head = new ListNode(*it);
                 node = head;
@@ -91,7 +124,6 @@ public:
             }
 
             if(count == pos){
-                cout << "pos:" << pos << endl;
                 cycleNode = node;
             }
 
@@ -101,6 +133,9 @@ public:
 
         if(cycleNode != nullptr){
             node->next = cycleNode;
+            fprintf(stdout, "cycleNode:%p\t", cycleNode);
+        }else{
+            fprintf(stdout, "cycleNode:nullptr\t");
         }
 
         return true;
@@ -109,13 +144,16 @@ public:
 
 int main()
 {
-    pair<vector<int>, int> t1, t2, t3;
+    pair<vector<int>, int> t1, t2, t3, t4, t5, t6;
     Solution s;
     t1 = make_pair(vector<int>{3,2,0,-4}, 1);
     t2 = make_pair(vector<int>{1,2}, 0);
     t3 = make_pair(vector<int>{1}, -1);
+    t4 = make_pair(vector<int>{1}, 0);
+    t5 = make_pair(vector<int>{-1,-7,7,-4,19,6,-9,-5,-2,-5}, 9);
+    t6 = make_pair(vector<int>{-21,10,17,8,4,26,5,35,33,-7,-16,27,-12,6,29,-12,5,9,20,14,14,2,13,-24,21,23,-21,5}, 24);
 
-    vector<pair<vector<int>, int> >test_vector {t1, t2, t3};
+    vector<pair<vector<int>, int> >test_vector {t1, t2, t3, t4, t5, t6};
     vector<pair<vector<int>, int> >::const_iterator cit = test_vector.begin();
 
     while(cit != test_vector.end())
@@ -127,20 +165,21 @@ int main()
         }
 
         // s.PrintLinkedList(head);
+        /*
         if(s.hasCycle(head)){
             cout << "true" << endl;
         }else{
             cout << "false" << endl;
         }
+        */
+        
+        ListNode *node = s.detectCycle(head);
+        if(node == nullptr){
+            fprintf(stdout, "Found:nullptr\n");
+        }else{
+            fprintf(stdout, "Found:%p\n", node);
+        }
         cit++;
     }
-
-    /*
-    vector<int> v1 = t1.first;
-    vector<int>::iterator it = v1.begin();
-    while(it != v1.end()){
-        cout << *it++ << endl;
-    }
-    */
 }
 
