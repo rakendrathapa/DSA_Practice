@@ -57,7 +57,7 @@ public:
         }
         return true;
     }
-    
+
     ListNode *detectCycle(ListNode *head) {
         if(head == nullptr){
             return nullptr;
@@ -172,7 +172,7 @@ int main()
             cout << "false" << endl;
         }
         */
-        
+
         ListNode *node = s.detectCycle(head);
         if(node == nullptr){
             fprintf(stdout, "Found:nullptr\n");
