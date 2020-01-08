@@ -59,15 +59,41 @@ int removeDuplicates(vector<int>& nums)
     }
     for(size_t i=0; i<len; i++){
         nums[i] = stack[i];
-        cout << nums[i];
+        cout << nums[i] << " ";
     }
 
     return len;
 }
 
+int removeDuplicates2(vector<int>& nums)
+{
+    if(nums.size()< 2){
+        return nums.size();
+    }
+    int j = 0;
+	int i = 1;
+
+	while (i < nums.size()) {
+		if (nums[i] != nums[j]) {
+			j++;
+			nums[j] = nums[i];
+		}
+        i++;
+	}
+
+    for(size_t i=0; i<(j + 1); i++){
+        cout << nums[i] << " ";
+    }
+	return j + 1;
+}
+
 int main()
 {
-    vector<int> t1{0,0,1,1,1,2,2,3,3,4};
-    cout << removeDuplicates(t1) << endl;
+    vector<int> t1{0,0,1,1,1,2,2,3,3,4,0,1};
+    vector<int> t2{0,0,1,1,1,2,2,3,3,4,0,1};
+    int len = removeDuplicates(t1);
+    cout << "\nlen:" << len << endl;
+    len = removeDuplicates2(t2);
+    cout << "\nlen:" << len << endl;
     return EXIT_SUCCESS;
 }
