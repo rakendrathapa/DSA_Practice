@@ -1,8 +1,8 @@
 /**
  * ALGORITHM NAME: Modular Exponentiation (Power in Modular Arithmetic)
- * 
+ *
  * Given three numbers x, y and p, compute (xy) % p.
- **/ 
+ **/
 
 #include <iostream>
 #include <stdexcept>
@@ -72,6 +72,6 @@ int GetModulo(int n, int exp, int mod)
         exp = exp >> 1;
         i++;
     }
-    
+
     return total_mod;
 }
