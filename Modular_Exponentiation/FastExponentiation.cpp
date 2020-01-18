@@ -47,14 +47,14 @@ int GetModulo(int n, int exp, int mod)
         isNeg = true;
     }
 
-    vector<int> mod_iter;
-    int t_e=1, t_m=(n % mod);
+    vector<long long> mod_iter;
+    long long t_e=1, t_m=(n % mod);
     int count = 0;
     mod_iter.push_back(t_m);
 
     cout << count++ << ". Exp:" << t_e << " Mod:" << t_m << endl;
-    while(t_e <= exp){
-        t_e = t_e * 2;
+    while((t_e = t_e*2) <= exp){
+        // t_e = t_e * 2;
         t_m = t_m * t_m;
         t_m = t_m % mod;
         cout << count++ <<". Exp:" << t_e << " Mod:" << t_m << endl;
@@ -62,16 +62,16 @@ int GetModulo(int n, int exp, int mod)
     }
 
     int i=0;
-    int total_mod = 1;
+    long long total_mod = 1;
     while (exp)
     {
         if(exp & 0x1){
-            total_mod *= mod_iter[i];
+            total_mod = (total_mod * mod_iter[i]) % mod;
             cout << "i:" << i << " Mod:" << mod_iter[i] << " Cumulative Mod:" << total_mod << endl;
         }
         exp = exp >> 1;
         i++;
     }
     
-    return total_mod % mod;
+    return total_mod;
 }
